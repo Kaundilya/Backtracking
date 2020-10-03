@@ -1,0 +1,40 @@
+class Solution {
+private:
+    unordered_map<char,string>keypad;
+    vector<string>ans;
+    string temp;
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.empty())
+            return ans;
+        keypad={{'2',"abc"},
+               {'3',"def"},
+               {'4',"ghi"},
+               {'5',"jkl"},
+               {'6',"mno"},
+               {'7',"pqrs"},
+               {'8',"tuv"},
+               {'9',"wxyz"}
+              };
+         traceback(0,digits);
+        return ans;
+    }
+    
+    void traceback(int level,string digits)
+    {
+        int len=digits.length();
+        if(len==level)
+        {
+            ans.push_back(temp);
+            return;
+        }
+        char letter=digits[level];
+        string combinations=keypad[letter];
+        for(int i=0;i<combinations.length();i++)
+        {
+            temp.push_back(combinations[i]);
+            traceback(level+1,digits);
+            temp.pop_back();
+        }
+    }
+};
