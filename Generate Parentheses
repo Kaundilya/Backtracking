@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void util(string s,int cp,int op,vector<string>&ans)
+    {
+        if(cp<0 && op<0)
+            return;
+        if(cp==0 && op==0)
+            ans.push_back(s);
+        if(cp>0 || op>0)
+        {
+            if(cp>0 && cp<=op)
+                util(s+'(',cp-1,op,ans);
+            if(op>0 && op>cp)
+                util(s+')',cp,op-1,ans);
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string>ans;
+        util("",n,n,ans);
+        return ans;
+    }
+};
